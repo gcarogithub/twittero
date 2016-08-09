@@ -10,8 +10,9 @@ class UsersController < ApplicationController
   end
   
   def create
-    @user = User.new(user_params)    # Not the final implementation!
+    @user = User.new(user_params)    
     if @user.save
+      log_in @user  # logging in user right after signing up
       flash[:success] = "Welcome to the Sample App!"
       redirect_to @user # this works because Rails automatically infers from redirect_to @user that we want to redirect to user_url(@user).
       #redirect_to user_url(@user)  #this is the original expression
